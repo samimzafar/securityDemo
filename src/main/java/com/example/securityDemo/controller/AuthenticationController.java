@@ -1,5 +1,8 @@
 package com.example.securityDemo.controller;
 
+import com.example.securityDemo.dto.JwtAuthenticationResponse;
+import com.example.securityDemo.dto.RefreshTokenRequest;
+import com.example.securityDemo.dto.SignInRequest;
 import com.example.securityDemo.dto.SignUpRequest;
 import com.example.securityDemo.entity.User;
 import com.example.securityDemo.services.AuthenticationService;
@@ -18,6 +21,18 @@ public class AuthenticationController {
     @PostMapping("/signup")
     public ResponseEntity<User> signup(@RequestBody SignUpRequest signUpRequest){
         return ResponseEntity.ok(authenticationService.signup(signUpRequest));
+
+    }
+
+    @PostMapping("/signin")
+    public ResponseEntity<JwtAuthenticationResponse> signin(@RequestBody SignInRequest signInRequest){
+        return ResponseEntity.ok(authenticationService.signin(signInRequest));
+
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<JwtAuthenticationResponse> refresh(@RequestBody RefreshTokenRequest refreshTokenRequest){
+        return ResponseEntity.ok(authenticationService.refreshToken(refreshTokenRequest));
 
     }
 }
